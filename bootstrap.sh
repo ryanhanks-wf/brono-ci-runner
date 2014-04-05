@@ -20,8 +20,9 @@ echo "2. Add the key and press ctrl+d to continue"
 cat
 
 ssh -T git@github.com
+cd
 cat
-cd ~/
+
 git clone git@github.com:ryanhanks-wf/brony-ci-runner
 echo "**************************************************"
 echo "press ctrl+d when xcode install completes"
