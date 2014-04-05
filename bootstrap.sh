@@ -20,12 +20,14 @@ echo "2. Add the key and press ctrl+d to continue"
 cat
 
 ssh -T git@github.com
+cat
+cd ~/
 git clone git@github.com:ryanhanks-wf/brony-ci-runner
 echo "**************************************************"
 echo "press ctrl+d when xcode install completes"
 cat
 
-cd brony-ci-runner
+cd ~/brony-ci-runner
 sudo gem install bundler
 sudo bundle
 bundle exec soloist
