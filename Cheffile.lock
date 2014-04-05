@@ -1,22 +1,22 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    dmg (2.0.8)
-    homebrew (1.5.2)
+    dmg (2.2.0)
+    homebrew (1.5.4)
 
 GIT
-  remote: git://github.com/pivotal-sprout/sprout.git
+  remote: https://github.com/pivotal-sprout/sprout
   path: osx
   ref: master
-  sha: 1c86456712112273d8737a1744859eb3adb6ca86
+  sha: c141d32287df86bc965639347d9b72f17fb0d7e9
   specs:
     osx (0.1.0)
 
 GIT
-  remote: git://github.com/pivotal-sprout/sprout.git
+  remote: https://github.com/pivotal-sprout/sprout
   path: pivotal_workstation
   ref: master
-  sha: 1c86456712112273d8737a1744859eb3adb6ca86
+  sha: c141d32287df86bc965639347d9b72f17fb0d7e9
   specs:
     pivotal_workstation (1.0.0)
       dmg (>= 0.0.0)
@@ -28,10 +28,10 @@ GIT
       sprout-pivotal (>= 0.0.0)
 
 GIT
-  remote: git://github.com/pivotal-sprout/sprout.git
+  remote: https://github.com/pivotal-sprout/sprout
   path: sprout-osx-apps
   ref: master
-  sha: 1c86456712112273d8737a1744859eb3adb6ca86
+  sha: c141d32287df86bc965639347d9b72f17fb0d7e9
   specs:
     sprout-osx-apps (0.1.0)
       dmg (>= 0.0.0)
@@ -40,38 +40,38 @@ GIT
       sprout-osx-settings (>= 0.0.0)
 
 GIT
-  remote: git://github.com/pivotal-sprout/sprout.git
+  remote: https://github.com/pivotal-sprout/sprout
   path: sprout-osx-base
   ref: master
-  sha: 1c86456712112273d8737a1744859eb3adb6ca86
+  sha: c141d32287df86bc965639347d9b72f17fb0d7e9
   specs:
     sprout-osx-base (0.1.0)
 
 GIT
-  remote: git://github.com/pivotal-sprout/sprout.git
+  remote: https://github.com/pivotal-sprout/sprout
   path: sprout-osx-git
   ref: master
-  sha: 1c86456712112273d8737a1744859eb3adb6ca86
+  sha: c141d32287df86bc965639347d9b72f17fb0d7e9
   specs:
     sprout-osx-git (0.1.0)
       homebrew (>= 0.0.0)
       sprout-osx-base (>= 0.0.0)
 
 GIT
-  remote: git://github.com/pivotal-sprout/sprout.git
+  remote: https://github.com/pivotal-sprout/sprout
   path: sprout-osx-rbenv
   ref: master
-  sha: 1c86456712112273d8737a1744859eb3adb6ca86
+  sha: c141d32287df86bc965639347d9b72f17fb0d7e9
   specs:
     sprout-osx-rbenv (0.1.0)
       homebrew (>= 0.0.0)
       sprout-osx-base (>= 0.0.0)
 
 GIT
-  remote: git://github.com/pivotal-sprout/sprout.git
+  remote: https://github.com/pivotal-sprout/sprout
   path: sprout-osx-rubymine
   ref: master
-  sha: 1c86456712112273d8737a1744859eb3adb6ca86
+  sha: c141d32287df86bc965639347d9b72f17fb0d7e9
   specs:
     sprout-osx-rubymine (0.1.0)
       homebrew (>= 0.0.0)
@@ -79,10 +79,10 @@ GIT
       sprout-osx-base (>= 0.0.0)
 
 GIT
-  remote: git://github.com/pivotal-sprout/sprout.git
+  remote: https://github.com/pivotal-sprout/sprout
   path: sprout-osx-settings
   ref: master
-  sha: 1c86456712112273d8737a1744859eb3adb6ca86
+  sha: c141d32287df86bc965639347d9b72f17fb0d7e9
   specs:
     sprout-osx-settings (0.1.0)
       homebrew (>= 0.0.0)
@@ -90,28 +90,46 @@ GIT
       sprout-osx-base (>= 0.0.0)
 
 GIT
-  remote: git://github.com/pivotal-sprout/sprout.git
+  remote: https://github.com/pivotal-sprout/sprout
   path: sprout-pivotal
   ref: master
-  sha: 1c86456712112273d8737a1744859eb3adb6ca86
+  sha: c141d32287df86bc965639347d9b72f17fb0d7e9
   specs:
     sprout-pivotal (0.1.0)
       dmg (>= 0.0.0)
       homebrew (>= 0.0.0)
       sprout-osx-base (>= 0.0.0)
 
+GIT
+  remote: https://github.com/pivotal-sprout/sprout-homebrew
+  ref: master
+  sha: 25251cec3bc0325fcc2f3b6ebb5ce3d135414cca
+  specs:
+    sprout-homebrew (0.1.0)
+      homebrew (>= 0.0.0)
+
+GIT
+  remote: https://github.com/pivotal-sprout/sprout-terminal
+  ref: master
+  sha: d238fd546063112c9536317f1912a649af6b16f1
+  specs:
+    sprout-terminal (0.2.0)
+      osx (>= 0.0.0)
+
 PATH
   remote: site-cookbooks/meta
   specs:
-    meta (0.1.0)
+    meta (0.1.1)
       pivotal_workstation (>= 0.0.0)
       sprout-osx-apps (>= 0.0.0)
       sprout-osx-settings (>= 0.0.0)
+      sprout-pivotal (>= 0.0.0)
 
 DEPENDENCIES
   meta (>= 0)
   osx (>= 0)
   pivotal_workstation (>= 0)
+  sprout-homebrew (>= 0)
   sprout-osx-apps (>= 0)
   sprout-osx-base (>= 0)
   sprout-osx-git (>= 0)
@@ -119,4 +137,5 @@ DEPENDENCIES
   sprout-osx-rubymine (>= 0)
   sprout-osx-settings (>= 0)
   sprout-pivotal (>= 0)
+  sprout-terminal (>= 0)
 
