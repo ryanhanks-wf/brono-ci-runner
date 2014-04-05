@@ -26,7 +26,7 @@ ssh -T git@github.com
 cd
 
 echo "**************************************************"
-echo "press ctrl+d when xcode install completes"
+echo "press ctrl+d when xcode and java install are completes"
 cat
 
 # git clone git@github.com:ryanhanks-wf/brono-ci-runner
@@ -54,7 +54,9 @@ brew install node cmake python ant jenkins
 pip install virtualenv
  
  
-npm install -g grunt-cli cordova phantomjs
+npm install -g grunt-cli
+npm install -g cordova
+npm install -g phantomjs
  
 sudo gem install compass-rgbapng
 
@@ -63,11 +65,15 @@ sudo gem install compass-rgbapng
 mkdir ~/Library/LaunchAgents
 ln -sfv /usr/local/opt/jenkins/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist
+echo "press ctrl+d when jenkins has started"
+cat
+open http://localhost:8080/jnlpJars/jenkins-cli.jar
 
  
 # update plugin list from advanced tab
 # download cli.jar from 
-java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin -restart github
+
+java -jar ~/Downloads/jenkins-cli.jar -s http://localhost:8080/ install-plugin -restart github
 echo "press ctrl+d when jenkins has restarted"
 cat
 cat > brono.job <<EOF 
