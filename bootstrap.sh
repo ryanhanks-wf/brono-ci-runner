@@ -4,8 +4,8 @@ echo "1. open https://github.com/settings/ssh (in your pasteboard) and continue"
 
 xcode-select --install
 
-mkdir .ssh
-cd .ssh/
+mkdir ~/.ssh
+cd ~/.ssh/
 ssh-keygen -t rsa -C "ryan.hanks@webfilings.com"
 ssh-add ~/.ssh/id_rsa
 cd
