@@ -7,6 +7,7 @@ xcode-select --install
 mkdir ~/.ssh
 cd ~/.ssh/
 ssh-keygen -t rsa -C "ryan.hanks@webfilings.com"
+cat
 ssh-add ~/.ssh/id_rsa
 cd
 
@@ -19,7 +20,7 @@ echo "2. Add the key and press ctrl+d to continue"
 cat
 
 ssh -T git@github.com
-git clone git@github.com:ryanhanks-wf/bdub 
+git clone git@github.com:ryanhanks-wf/brony-ci-runner
 echo "**************************************************"
 echo "press ctrl+d when xcode install completes"
 cat
