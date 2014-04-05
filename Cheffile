@@ -1,5 +1,8 @@
 site 'http://community.opscode.com/api/v1'
 
+cookbook 'wf',
+  :path => 'wf-cookbook'
+
 cookbook 'meta',
   :path => 'site-cookbooks/meta'
 

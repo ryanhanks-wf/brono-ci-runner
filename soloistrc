@@ -1,51 +1,35 @@
+cookbook_paths:
+  - ./bdub-cookbooks
+
 recipes:
 
-# base (required by sprout)
-- sprout-osx-base::bash_it
-- pivotal_workstation::create_var_chef_cache
-- sprout-osx-base::homebrew
-
-# settings
-- pivotal_workstation::sshd_on
+# amenitites
 - pivotal_workstation::inputrc
 - sprout-osx-settings::defaults_fast_key_repeat_rate
-- pivotal_workstation::locate_on
-- sprout-osx-settings::global_environment_variables
 - sprout-osx-settings::dock_preferences
-
-# development (general)
-- sprout-osx-base::workspace_directory
 - pivotal_workstation::unix_essentials
-- sprout-osx-git::git_projects
-- pivotal_workstation::git_config_global_defaults
-- sprout-osx-git::git_scripts
+- sprout-osx-base::bash_it
 
 # apps
+- sprout-osx-apps::sublime_text
 - sprout-osx-apps::chrome
-- pivotal_workstation::mouse_locator
-- pivotal_workstation::bettertouchtool
+
+
+# bigsky dependencies
+- sprout-osx-base::homebrew
 - sprout-osx-apps::java
 
-# apps (editors)
-- sprout-osx-apps::sublime_text
+- wf::default
 
 node_attributes:
-  git_projects:
-    -
-      - veggie-salad
-      - https://github.com/ryanhanks/veggie-salad.git
   sprout:
     homebrew:
       casks:
-      - witch
-      - totalspaces
-      - omnifocus
-      - onepassword
-      - google-notifier
-      - bettertouchtool
-      - jing
       - iterm2
   dock_preferences:
     orientation: bottom
     tilesize: 50
- workspace_directory: Development
+
+
+
+
