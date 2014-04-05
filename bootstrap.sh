@@ -115,18 +115,16 @@ cat > brono.job <<EOF
   <builders>
     <hudson.tasks.Shell>
       <command>echo &quot;success&quot;
+export PATH=/usr/local/bin:$PATH
 rm -rf ~/.brono
 npm install
-brono_path=$(pwd)/bin/brono
-test_workspace=$WORKSPACE/test-workspace
-echo $(mkdir $test_workspace)
-pushd $test_workspace
-rm -rf *
+workspace_path=$WORKSPACE/tmp/$BUILD_NUMBER
+mkdir -p $workspace_path
+cd $workspace_path
+brono_path=$WORKSPACE/bin/brono
 $brono_path init
-cat brono.json
-pwd
 $brono_path install
-</command>
+      </command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
