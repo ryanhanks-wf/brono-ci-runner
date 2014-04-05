@@ -25,7 +25,7 @@ echo "**************************************************"
 echo "press ctrl+d when xcode install completes"
 cat
 
-cd bdub
+cd brony-ci-runner
 sudo gem install bundler
 sudo bundle
 bundle exec soloist
