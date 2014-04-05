@@ -23,11 +23,11 @@ ssh -T git@github.com
 cd
 cat
 
-git clone git@github.com:ryanhanks-wf/brony-ci-runner
 echo "**************************************************"
 echo "press ctrl+d when xcode install completes"
 cat
 
+git clone git@github.com:ryanhanks-wf/brony-ci-runner
 cd ~/brony-ci-runner
 sudo gem install bundler
 sudo bundle
