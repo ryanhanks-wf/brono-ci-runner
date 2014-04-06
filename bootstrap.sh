@@ -50,30 +50,39 @@ EOF
 
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 brew doctor
-brew install node cmake python ant jenkins
+brew install node
+brew install python
+brew install ant
+# brew install jenkins
+brew install cmake 
 pip install virtualenv
  
  
 npm install -g grunt-cli
 npm install -g cordova
 npm install -g phantomjs
+npm install -g git+ssh://git@github.com:ryanhanks-wf/brono
  
 sudo gem install compass-rgbapng
 
 # install 2
- 
-mkdir ~/Library/LaunchAgents
-ln -sfv /usr/local/opt/jenkins/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist
-echo "press ctrl+d when jenkins has started"
-cat
-open http://localhost:8080/jnlpJars/jenkins-cli.jar
 
+brew install jenkins 
+mkdir ~/Library/LaunchAgents
+sed s/8080/8090/ /usr/local/opt/jenkins/homebrew.mxcl.jenkins.plist > ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist
+open http://localhost:8090/pluginManager/advanced
+echo "update jenkins plugins and press ctrl+d when jenkins is ready"
+cat
+open http://localhost:8090/jnlpJars/jenkins-cli.jar
+echo "press ctrl+d when cli download is complete"
 cat
 # update plugin list from advanced tab
 # download cli.jar from 
 
-java -jar ~/Downloads/jenkins-cli.jar -s http://localhost:8080/ install-plugin -restart github
+java -jar ~/Downloads/jenkins-cli.jar -s http://localhost:8090/ install-plugin -restart github
+sleep 1
+open http://localhost:8090/
 echo "press ctrl+d when jenkins has restarted"
 cat
 cat > brono.job <<EOF 
@@ -92,7 +101,6 @@ cat > brono.job <<EOF
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
         <url>git+ssh://git@github.com/ryanhanks-wf/brono</url>
-        <credentialsId>cdb26fcd-d89e-4fe7-b920-ccea219edee4</credentialsId>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -123,76 +131,13 @@ cat > brono.job <<EOF
       <command>echo &quot;success&quot;
 export PATH=/usr/local/bin:\$PATH
 rm -rf ~/.brono
-npm install
-workspace_path=\$WORKSPACE/tmp/\$BUILD_NUMBER
-mkdir -p \$workspace_path
-cd $workspace_path
-brono_path=\$WORKSPACE/bin/brono
-\$brono_path init
-\$brono_path install
-      </command>
-    </hudson.tasks.Shell>
-  </builders>
-  <publishers/>
-  <buildWrappers/>
-</project>
-EOF
-cat brono.job | java -jar ~/Downloads/jenkins-cli.jar -s http://localhost:8080/ create-job brono-install 
-
-cat > brono.job <<EOF 
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
-  <actions/>
-  <description></description>
-  <keepDependencies>false</keepDependencies>
-  <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.8">
-      <projectUrl>https://github.com/ryanhanks-wf/brono/</projectUrl>
-    </com.coravy.hudson.plugins.github.GithubProjectProperty>
-  </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.1.0">
-    <configVersion>2</configVersion>
-    <userRemoteConfigs>
-      <hudson.plugins.git.UserRemoteConfig>
-        <url>git+ssh://git@github.com/ryanhanks-wf/brono</url>
-        <credentialsId>cdb26fcd-d89e-4fe7-b920-ccea219edee4</credentialsId>
-      </hudson.plugins.git.UserRemoteConfig>
-    </userRemoteConfigs>
-    <branches>
-      <hudson.plugins.git.BranchSpec>
-        <name>**</name>
-      </hudson.plugins.git.BranchSpec>
-    </branches>
-    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-    <submoduleCfg class="list"/>
-    <extensions/>
-  </scm>
-  <canRoam>true</canRoam>
-  <disabled>false</disabled>
-  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.8">
-      <spec></spec>
-    </com.cloudbees.jenkins.GitHubPushTrigger>
-    <hudson.triggers.SCMTrigger>
-      <spec>* * * * *</spec>
-      <ignorePostCommitHooks>false</ignorePostCommitHooks>
-    </hudson.triggers.SCMTrigger>
-  </triggers>
-  <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <hudson.tasks.Shell>
-      <command>echo &quot;success&quot;
-export PATH=/usr/local/bin:\$PATH
 npm update
 workspace_path=\$WORKSPACE/tmp/\$BUILD_NUMBER
 mkdir -p \$workspace_path
 cd \$workspace_path
 brono_path=\$WORKSPACE/bin/brono
 \$brono_path init
-\$brono_path install
-node test/test.js
+\$brono_path build:books
       </command>
     </hudson.tasks.Shell>
   </builders>
@@ -200,4 +145,4 @@ node test/test.js
   <buildWrappers/>
 </project>
 EOF
-cat brono.job | java -jar ~/Downloads/jenkins-cli.jar -s http://localhost:8080/ create-job brono-install 
+cat brono.job | java -jar ~/Downloads/jenkins-cli.jar -s http://localhost:8090/ create-job brono-build-clean
