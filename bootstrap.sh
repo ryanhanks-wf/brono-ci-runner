@@ -135,7 +135,7 @@ npm update
 workspace_path=\$WORKSPACE/tmp/\$BUILD_NUMBER
 mkdir -p \$workspace_path
 cd \$workspace_path
-brono_path=\$WORKSPACE/bin/brono
+brono_path=\$WORKSPACE/bin/bro
 \$brono_path init
 \$brono_path build:books
       </command>
